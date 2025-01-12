@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: teal;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: teal;
+}
+.container {
+  background-color: rgb(245, 244, 244);
+  border-radius: 20px;
+  padding: 20px;
+  width: 500px;
+}
+.title {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.touchParent {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.btn,
+.input {
+  outline: none;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+::placeholder {
+	opacity: 0.8;
+}
+.input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+}
+.btn {
+  background-color: white;
+  padding: 10px 0;
+}
