@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { evaluate } from "mathjs";
 import "./style.css";
 
 const App = () => {
@@ -12,10 +13,14 @@ const App = () => {
     setInputValue((prev) => prev + value);
   };
 
-  // calculate
+  // calculate 🛑❌ do not use eval() ==> this is not good for security
   const calculate = () => {
     try {
-      setInputValue(String(Function(`"use strict"; return (${inputValue})`)()));
+      // you can use (mathjs) 
+      setInputValue(String(evaluate(inputValue)));
+
+      // you can also use a function 
+      // setInputValue(String(Function(`"use strict"; return (${inputValue})`)()));
     } catch (error) {
       setInputValue("Erreur !");
     }
