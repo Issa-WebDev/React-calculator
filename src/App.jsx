@@ -4,29 +4,36 @@ import "./style.css";
 const App = () => {
   const [inputValue, setInputValue] = useState("");
 
+  // clear input
   const clear = () => setInputValue("");
 
+  // add value
   const addValue = (value) => {
-    setInputValue(inputValue + value);
+    setInputValue((prev) => prev + value);
   };
 
-  const calculate = (e) => {
-    e.preventDefault();
-    const result = eval(inputValue);
-    setInputValue(result);
+  // calculate
+  const calculate = () => {
+    try {
+      setInputValue(String(Function(`"use strict"; return (${inputValue})`)()));
+    } catch (error) {
+      setInputValue("Erreur !");
+    }
   };
 
-  // const removeOne = () => {
-  //   setInputValue(inputValue.slice(0, -1));
-  // };
+  // delete last element
+  const deleteOneByOne = () => {
+    setInputValue(inputValue.slice(0, -1));
+  };
 
   return (
     <div className="container">
       <h1 className="title">Calculator with react js</h1>
-      <form className="form" onSubmit={calculate}>
+      <div className="form">
         <input
           type="text"
           className="input"
+          readOnly
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="New calc"
@@ -35,11 +42,13 @@ const App = () => {
           <button className="btn" onClick={() => clear()}>
             AC
           </button>
-          <button className="btn">🔙</button>
-          <button className="btn" onClick={() => addValue("2")}>
+          <button className="btn" onClick={deleteOneByOne}>
+            🔙
+          </button>
+          <button className="btn" onClick={() => addValue("%")}>
             %
           </button>
-          <button className="btn" onClick={() => addValue("2")}>
+          <button className="btn" onClick={() => addValue("/")}>
             /
           </button>
         </div>
@@ -97,13 +106,13 @@ const App = () => {
             0
           </button>
           <button className="btn" onClick={() => addValue(".")}>
-            ,
+            .
           </button>
-          <button className="btn" type="submit">
-            =
+          <button onClick={calculate} className="btn" type="submit">
+            {"="}
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
